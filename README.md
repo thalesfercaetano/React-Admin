@@ -19,7 +19,7 @@ If you are developing a production application, we recommend using TypeScript wi
 ## Para iniciar o projeto, basta rodar o comando:
 
 ```
-    bash cd C:\Users\Thales\Documents\React_teste\meu-projeto-react
+    bash cd meu-projeto-react
     bash dir 
     bash npm install
     bash npm run dev
