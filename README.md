@@ -1,26 +1,38 @@
-# React + Vite
+# Controll Admin ⚙️
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Painel administrativo moderno desenvolvido com **React** e **Vite**, focado em gerenciamento de tarefas, cadastros e visualização de métricas empresariais.
 
-Currently, two official plugins are available:
+## 📋 Sobre o Projeto
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+O **Controll Admin** é uma Single Page Application (SPA) que simula um dashboard de gestão. O projeto foi construído para demonstrar o uso prático de **React Hooks** (`useState`), renderização condicional de componentes e manipulação de listas.
 
-## React Compiler
+Diferente de estruturas tradicionais, este projeto gerencia sua própria navegação internamente, oferecendo uma experiência fluida e rápida.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 🚀 Tecnologias Utilizadas
 
-## Expanding the ESLint configuration
+* **[React](https://react.dev/)** (v19) - Biblioteca para interfaces de usuário.
+* **[Vite](https://vitejs.dev/)** - Ferramenta de build extremamente rápida.
+* **[SweetAlert2](https://sweetalert2.github.io/)** - Biblioteca para alertas e modais elegantes.
+* **CSS3** - Estilização customizada com variáveis e design responsivo (Dark Theme).
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## ✨ Funcionalidades
 
+* **🔐 Autenticação:** Tela de login com validação de campos e feedback visual via SweetAlert2.
+* **📋 Gerenciador de Tarefas (Home):** Sistema de To-Do List integrado com filtros (Todas, Pendentes, Concluídas).
+* **📝 Cadastro Dinâmico:** Formulário inteligente com abas para cadastrar tanto **Clientes** quanto **Produtos**.
+* **📦 Gestão de Produtos:** Listagem com **barra de busca** em tempo real e filtro por **categorias**.
+* **👥 Base de Clientes:** Tabela para visualização rápida de contatos cadastrados.
+* **🚚 Histórico de Entregas:** Visualização de pedidos concluídos com status e valores.
+* **📊 Relatórios:** Dashboard com cards de métricas (Vendas, Clientes Ativos) e feed de atividades recentes.
 
-## Para iniciar o projeto, basta rodar o comando:
+## 📂 Estrutura do Projeto
 
-```
-    bash cd meu-projeto-react
-    bash dir 
-    bash npm install
-    bash npm run dev
-```
+A organização de pastas segue o padrão de separação por responsabilidades:
+
+```text
+src/
+├── components/      # Componentes reutilizáveis (Layout, Sidebar)
+├── pages/           # Componentes de página (Home, Cadastro, Produtos, etc.)
+├── assets/          # Imagens e recursos estáticos
+├── App.jsx          # Lógica principal e roteamento de estado
+└── main.jsx         # Ponto de entrada da aplicação
