@@ -1,0 +1,75 @@
+.entregas-page .page-subtitle {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.95rem;
+  margin-top: 4px;
+}
+
+.entregas-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.entrega-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 14px;
+  padding: 20px;
+  transition: all 0.2s;
+}
+
+.entrega-card:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+}
+
+.entrega-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.entrega-id {
+  font-size: 0.8rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.entrega-status {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #86efac;
+  background: rgba(134, 239, 172, 0.15);
+  padding: 4px 10px;
+  border-radius: 8px;
+}
+
+.entrega-cliente {
+  font-weight: 600;
+  color: #fff;
+  margin-bottom: 4px;
+}
+
+.entrega-endereco {
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.6);
+  margin-bottom: 12px;
+}
+
+.entrega-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 12px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.entrega-data {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.entrega-valor {
+  font-weight: 600;
+  color: #a78bfa;
+}

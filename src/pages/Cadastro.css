@@ -1,0 +1,143 @@
+.cadastro-page .page-subtitle {
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 0.95rem;
+  margin-top: 4px;
+}
+
+.cadastro-tabs {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+
+.cadastro-tabs button {
+  padding: 10px 20px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.cadastro-tabs button:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+}
+
+.cadastro-tabs button.active {
+  background: linear-gradient(135deg, #5b21b6 0%, #7c3aed 100%);
+  border-color: transparent;
+  color: #fff;
+}
+
+.cadastro-form-section {
+  display: flex;
+  gap: 32px;
+  flex-wrap: wrap;
+}
+
+.cadastro-form {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  padding: 28px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  max-width: 420px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-group label {
+  font-size: 0.85rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.form-group input {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(0, 0, 0, 0.2);
+  color: #fff;
+  font-size: 0.95rem;
+}
+
+.form-group input::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+.form-select-categoria {
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: #1a1a24;
+  color: #fff;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.form-select-categoria option {
+  background: #1a1a24;
+  color: #fff;
+}
+
+.form-mensagem {
+  font-size: 0.9rem;
+  color: #86efac;
+  margin: 0;
+}
+
+.btn-submit {
+  padding: 12px 24px;
+  border-radius: 10px;
+  border: none;
+  background: linear-gradient(135deg, #5b21b6 0%, #7c3aed 100%);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: transform 0.2s, opacity 0.2s;
+  margin-top: 8px;
+}
+
+.btn-submit:hover {
+  transform: scale(1.02);
+  opacity: 0.95;
+}
+
+.ultimos-cadastros {
+  background: rgba(255, 255, 255, 0.03);
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  min-width: 280px;
+}
+
+.ultimos-cadastros h3 {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin-bottom: 12px;
+}
+
+.ultimos-cadastros ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.ultimos-cadastros li {
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+.ultimos-cadastros li:last-child {
+  border-bottom: none;
+}
