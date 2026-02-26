@@ -15,7 +15,11 @@ function App() {
   const [usuario, setUsuario] = useState("");
   const [senha, setSenha] = useState("");
   const [paginaAtual, setPaginaAtual] = useState("home");
-  const [clientes, setClientes] = useState([]);
+  const [clientes, setClientes] = useState([
+    { id: 1, nome: "Maria Silva", email: "maria@email.com", telefone: "(11) 98765-4321" },
+    { id: 2, nome: "João Santos", email: "joao@email.com", telefone: "(21) 91234-5678" },
+    { id: 3, nome: "Ana Oliveira", email: "ana@email.com", telefone: "(31) 99876-5432" },
+  ]);
   const [produtos, setProdutos] = useState([]);
 
   function login(e) {
@@ -40,6 +44,28 @@ function App() {
 
       )
     }
+  }
+
+  function deletarCliente(id){
+    Swal.fire({
+      title: 'Tem certeza?',
+      text: "Essa ação não pode ser desfeita!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Sim, deletar!',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if(result.isConfirmed){
+        setClientes(clientes.filter(cliente => cliente.id !== id))
+        Swal.fire(
+          'Deletado!',
+          'Cliente deletado com sucesso.',
+          'success'
+        )
+      }
+    })
   }
 
   function handleCadastrar(item) {
@@ -100,7 +126,9 @@ function App() {
       case "produtos":
         return <Produtos produtosCadastrados={produtos} />;
       case "clientes":
-        return <Clientes clientesCadastrados={clientes} />;
+        return (
+          <Clientes clientes={clientes} onDeletar={deletarCliente} />
+        );
       case "entregas":
         return <Entregas />;
       case "relatorios":
