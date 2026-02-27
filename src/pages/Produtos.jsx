@@ -1,19 +1,10 @@
 import { useState } from "react";
 import "./Produtos.css";
 
-const PRODUTOS_INICIAIS = [
-  { id: 1, nome: "Notebook Pro 15", preco: 4299.9, estoque: 12, categoria: "Eletrônicos" },
-  { id: 2, nome: "Mouse Gamer", preco: 189.9, estoque: 45, categoria: "Periféricos" },
-  { id: 3, nome: "Teclado Mecânico", preco: 349.0, estoque: 28, categoria: "Periféricos" },
-  { id: 4, nome: "Monitor 27\" 4K", preco: 1899.0, estoque: 8, categoria: "Eletrônicos" },
-  { id: 5, nome: "Webcam HD", preco: 279.9, estoque: 32, categoria: "Periféricos" },
-  { id: 6, nome: "Headset Bluetooth", preco: 199.0, estoque: 56, categoria: "Áudio" },
-];
-
-function Produtos({ produtosCadastrados = [] }) {
+function Produtos({ produtosCadastrados = [], onDeletar }){
   const [busca, setBusca] = useState("");
   const [categoriaFiltro, setCategoriaFiltro] = useState("todas");
-  const todosProdutos = [...PRODUTOS_INICIAIS, ...produtosCadastrados];
+  const todosProdutos = produtosCadastrados;
 
   const categorias = ["todas", ...new Set(todosProdutos.map((p) => p.categoria || "Geral"))];
 
@@ -65,6 +56,13 @@ function Produtos({ produtosCadastrados = [] }) {
               Estoque: <strong>{p.estoque ?? 0}</strong> un.
             </p>
             <span className="produto-categoria">{p.categoria || "Geral"}</span>
+            <button
+              type="button"
+              className="btn-excluir"
+              onClick={() => onDeletar(p.id)}
+            >
+              Excluir
+            </button>
           </article>
         ))}
       </div>
