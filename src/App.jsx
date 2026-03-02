@@ -97,6 +97,31 @@ function App() {
     })
   }
 
+  function handleSair() {
+    Swal.fire({
+      title: "Sair do sistema?",
+      text: "Você será deslogado.",
+      icon: "question",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Sim, sair",
+      cancelButtonText: "Cancelar",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setLogado(false);
+        Swal.fire({
+          title: "Até logo!",
+          text: "Você saiu do sistema.",
+          icon: "success",
+          timer: 1500,
+          showConfirmButton: false,
+          timerProgressBar: true,
+        });
+      }
+    });
+  }
+
   function handleCadastrar(item) {
     if (item.tipo === "cliente") {
       setClientes((prev) => [...prev, { ...item, id: Date.now() }]);
@@ -174,7 +199,7 @@ function App() {
       paginaAtual={paginaAtual}
       setPaginaAtual={setPaginaAtual}
       usuario={usuario}
-      onSair={() => setLogado(false)}
+      onSair={handleSair}
     >
       {renderPagina()}
     </Layout>
