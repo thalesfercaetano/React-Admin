@@ -19,6 +19,20 @@ function Cadastro({ onCadastrar, clientes }) {
     { value: "Outros", label: "Outros" },
   ];
 
+  function formatarTelefone(valor) {
+    const numeros = valor.replace(/\D/g, "").slice(0, 11);
+
+    if (numeros.length === 0) return "";
+    if (numeros.length <= 2) return `(${numeros}`;
+    if (numeros.length <= 6) {
+      return `(${numeros.slice(0, 2)}) ${numeros.slice(2)}`;
+    }
+    if (numeros.length <= 10) {
+      return `(${numeros.slice(0, 2)}) ${numeros.slice(2, 6)}-${numeros.slice(6)}`;
+    }
+    return `(${numeros.slice(0, 2)}) ${numeros.slice(2, 7)}-${numeros.slice(7)}`;
+  }
+
   function handleSubmit(e) {
     e.preventDefault();
     setMensagem("");
@@ -105,7 +119,7 @@ function Cadastro({ onCadastrar, clientes }) {
                   type="text"
                   placeholder="(00) 00000-0000"
                   value={telefone}
-                  onChange={(e) => setTelefone(e.target.value)}
+                  onChange={(e) => setTelefone(formatarTelefone(e.target.value))}
                 />
               </div>
             </>
