@@ -9,6 +9,7 @@ html,
 #root {
   width: 100%;
   min-height: 100%;
+  overflow-x: hidden;
   font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
   background: #0f0f14;
   color: #fff;

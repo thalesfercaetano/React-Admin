@@ -1,3 +1,18 @@
+.cadastro-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+.cadastro-page .page-header {
+  width: 100%;
+  max-width: 900px;
+  text-align: center;
+}
+
 .cadastro-page .page-subtitle {
   color: rgba(255, 255, 255, 0.5);
   font-size: 0.95rem;
@@ -8,6 +23,9 @@
   display: flex;
   gap: 8px;
   margin-bottom: 24px;
+  width: 100%;
+  max-width: 900px;
+  justify-content: center;
 }
 
 .cadastro-tabs button {
@@ -35,7 +53,11 @@
 .cadastro-form-section {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 32px;
+  width: 100%;
+  max-width: 900px;
+  box-sizing: border-box;
 }
 
 .cadastro-form {
@@ -43,21 +65,28 @@
   border-radius: 16px;
   padding: 28px;
   border: 1px solid rgba(255, 255, 255, 0.06);
+  width: 100%;
   max-width: 420px;
   display: flex;
   flex-direction: column;
   gap: 18px;
+  box-sizing: border-box;
 }
 
 .cadastro-form-destaque {
-  max-width: 480px;
-  padding: 32px;
+  max-width: 580px;
+  min-width: 320px;
+  padding: 36px 40px;
+  gap: 20px;
 }
 
 .cadastro-ultimos-wrap {
   display: flex;
   gap: 24px;
   flex-wrap: wrap;
+  width: 100%;
+  justify-content: center;
+  max-width: 900px;
 }
 
 .form-group {
@@ -78,12 +107,16 @@
   background: rgba(0, 0, 0, 0.2);
   color: #fff;
   font-size: 0.95rem;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .form-group input::placeholder {
   color: rgba(255, 255, 255, 0.3);
 }
 
+.form-group select.form-select-categoria,
 .form-select-categoria {
   padding: 12px 14px;
   border-radius: 10px;
@@ -92,6 +125,9 @@
   color: #fff;
   font-size: 0.95rem;
   cursor: pointer;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
 }
 
 .form-select-categoria option {
