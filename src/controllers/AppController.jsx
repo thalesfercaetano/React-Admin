@@ -6,7 +6,7 @@ import Produtos from "../views/Produtos";
 import Clientes from "../views/Clientes";
 import Entregas from "../views/Entregas";
 import Relatorios from "../views/Relatorios";
-import { CLIENTES_INICIAIS, PRODUTOS_INICIAIS } from "../model/initialState";
+import { CLIENTES_INICIAIS, PRODUTOS_INICIAIS, PEDIDOS_INICIAIS } from "../model/initialState";
 import "../App.css";
 import Swal from "sweetalert2";
 import "sweetalert2/dist/sweetalert2.min.css";
@@ -18,6 +18,7 @@ function AppController() {
   const [paginaAtual, setPaginaAtual] = useState("home");
   const [clientes, setClientes] = useState(CLIENTES_INICIAIS);
   const [produtos, setProdutos] = useState(PRODUTOS_INICIAIS);
+  const [pedidos, setPedidos] = useState(PEDIDOS_INICIAIS);
 
   function login(e) {
     e?.preventDefault();
@@ -115,7 +116,7 @@ function AppController() {
   function handleCadastrar(item) {
     if (item.tipo === "cliente") {
       setClientes((prev) => [...prev, { ...item, id: Date.now() }]);
-    } else {
+    } else if (item.tipo === "produto") {
       setProdutos((prev) => [
         ...prev,
         {
@@ -124,6 +125,14 @@ function AppController() {
           preco: item.preco,
           estoque: item.estoque,
           categoria: item.categoria || "Outros",
+        },
+      ]);
+    } else if (item.tipo === "pedido") {
+      setPedidos((prev) => [
+        ...prev,
+        {
+          ...item,
+          id: Date.now(),
         },
       ]);
     }
@@ -165,7 +174,12 @@ function AppController() {
         return <Home />;
       case "cadastro":
         return (
-          <Cadastro onCadastrar={handleCadastrar} clientes={clientes} />
+          <Cadastro
+            onCadastrar={handleCadastrar}
+            clientes={clientes}
+            produtos={produtos}
+            pedidos={pedidos}
+          />
         );
       case "produtos":
         return (

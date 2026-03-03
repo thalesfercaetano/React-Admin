@@ -1,15 +1,27 @@
 import { useState } from "react";
 import "./Cadastro.css";
 
-function Cadastro({ onCadastrar, clientes }) {
+function Cadastro({ onCadastrar, clientes, produtos, pedidos }) {
+  const [tipo, setTipo] = useState("cliente");
+
+  // Cliente
   const [nome, setNome] = useState("");
   const [email, setEmail] = useState("");
   const [telefone, setTelefone] = useState("");
-  const [tipo, setTipo] = useState("cliente"); // cliente ou produto
+  const [endereco, setEndereco] = useState("");
+
+  // Produto
   const [produtoNome, setProdutoNome] = useState("");
   const [produtoPreco, setProdutoPreco] = useState("");
   const [produtoEstoque, setProdutoEstoque] = useState("");
   const [produtoCategoria, setProdutoCategoria] = useState("Outros");
+
+  // Pedido
+  const [pedidoClienteId, setPedidoClienteId] = useState("");
+  const [pedidoProdutoId, setPedidoProdutoId] = useState("");
+  const [pedidoQuantidade, setPedidoQuantidade] = useState("");
+  const [pedidoEndereco, setPedidoEndereco] = useState("");
+
   const [mensagem, setMensagem] = useState("");
 
   const CATEGORIAS_PRODUTO = [
@@ -38,16 +50,23 @@ function Cadastro({ onCadastrar, clientes }) {
     setMensagem("");
 
     if (tipo === "cliente") {
-      if (!nome.trim() || !email.trim()) {
-        setMensagem("Preencha nome e e-mail.");
+      if (!nome.trim() || !email.trim() || !endereco.trim()) {
+        setMensagem("Preencha nome, e-mail e endereço.");
         return;
       }
-      onCadastrar?.({ tipo: "cliente", nome: nome.trim(), email: email.trim(), telefone: telefone.trim() });
+      onCadastrar?.({
+        tipo: "cliente",
+        nome: nome.trim(),
+        email: email.trim(),
+        telefone: telefone.trim(),
+        endereco: endereco.trim(),
+      });
       setNome("");
       setEmail("");
       setTelefone("");
+      setEndereco("");
       setMensagem("Cliente cadastrado com sucesso!");
-    } else {
+    } else if (tipo === "produto") {
       if (!produtoNome.trim() || !produtoPreco) {
         setMensagem("Preencha nome e preço do produto.");
         return;
@@ -64,6 +83,25 @@ function Cadastro({ onCadastrar, clientes }) {
       setProdutoEstoque("");
       setProdutoCategoria("Outros");
       setMensagem("Produto cadastrado com sucesso!");
+    } else if (tipo === "pedido") {
+      if (!pedidoClienteId || !pedidoProdutoId || !pedidoQuantidade || !pedidoEndereco.trim()) {
+        setMensagem("Preencha cliente, produto, quantidade e endereço de entrega.");
+        return;
+      }
+
+      onCadastrar?.({
+        tipo: "pedido",
+        clienteId: Number(pedidoClienteId),
+        produtoId: Number(pedidoProdutoId),
+        quantidade: Number(pedidoQuantidade),
+        endereco: pedidoEndereco.trim(),
+      });
+
+      setPedidoClienteId("");
+      setPedidoProdutoId("");
+      setPedidoQuantidade("");
+      setPedidoEndereco("");
+      setMensagem("Pedido cadastrado com sucesso!");
     }
 
     setTimeout(() => setMensagem(""), 3000);
@@ -73,7 +111,7 @@ function Cadastro({ onCadastrar, clientes }) {
     <div className="page cadastro-page">
       <header className="page-header">
         <h1>Cadastro</h1>
-        <p className="page-subtitle">Cadastre clientes ou produtos no sistema.</p>
+        <p className="page-subtitle">Cadastre clientes, produtos e pedidos no sistema.</p>
       </header>
 
       <div className="cadastro-tabs">
@@ -89,11 +127,17 @@ function Cadastro({ onCadastrar, clientes }) {
         >
           📦 Produto
         </button>
+        <button
+          className={tipo === "pedido" ? "active" : ""}
+          onClick={() => setTipo("pedido")}
+        >
+          🧾 Pedido
+        </button>
       </div>
 
       <section className="cadastro-form-section">
-        <form onSubmit={handleSubmit} className="cadastro-form">
-          {tipo === "cliente" ? (
+        <form onSubmit={handleSubmit} className="cadastro-form cadastro-form-destaque">
+          {tipo === "cliente" && (
             <>
               <div className="form-group">
                 <label>Nome</label>
@@ -122,8 +166,18 @@ function Cadastro({ onCadastrar, clientes }) {
                   onChange={(e) => setTelefone(formatarTelefone(e.target.value))}
                 />
               </div>
+              <div className="form-group">
+                <label>Endereço</label>
+                <input
+                  type="text"
+                  placeholder="Rua, número, cidade - UF"
+                  value={endereco}
+                  onChange={(e) => setEndereco(e.target.value)}
+                />
+              </div>
             </>
-          ) : (
+          )}
+          {tipo === "produto" && (
             <>
               <div className="form-group">
                 <label>Nome do produto</label>
@@ -170,22 +224,109 @@ function Cadastro({ onCadastrar, clientes }) {
               </div>
             </>
           )}
+          {tipo === "pedido" && (
+            <>
+              <div className="form-group">
+                <label>Cliente</label>
+                <select
+                  value={pedidoClienteId}
+                  onChange={(e) => {
+                    const novoId = e.target.value;
+                    setPedidoClienteId(novoId);
+                    const clienteSelecionado = clientes?.find(
+                      (c) => String(c.id) === novoId
+                    );
+                    if (clienteSelecionado?.endereco) {
+                      setPedidoEndereco(clienteSelecionado.endereco);
+                    }
+                  }}
+                  className="form-select-categoria"
+                >
+                  <option value="">Selecione um cliente</option>
+                  {clientes?.map((c) => (
+                    <option key={c.id} value={c.id}>
+                      {c.nome}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label>Produto</label>
+                <select
+                  value={pedidoProdutoId}
+                  onChange={(e) => setPedidoProdutoId(e.target.value)}
+                  className="form-select-categoria"
+                >
+                  <option value="">Selecione um produto</option>
+                  {produtos?.map((p) => (
+                    <option key={p.id} value={p.id}>
+                      {p.nome}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label>Quantidade</label>
+                <input
+                  type="number"
+                  min="1"
+                  placeholder="Quantidade"
+                  value={pedidoQuantidade}
+                  onChange={(e) => setPedidoQuantidade(e.target.value)}
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Endereço de entrega</label>
+                <input
+                  type="text"
+                  placeholder="Rua, número, cidade - UF"
+                  value={pedidoEndereco}
+                  onChange={(e) => setPedidoEndereco(e.target.value)}
+                />
+              </div>
+            </>
+          )}
           {mensagem && <p className="form-mensagem">{mensagem}</p>}
           <button type="submit" className="btn-submit">
             Cadastrar
           </button>
         </form>
 
-        {clientes?.length > 0 && (
-          <div className="ultimos-cadastros">
-            <h3>Últimos clientes cadastrados</h3>
-            <ul>
-              {clientes.slice(-5).reverse().map((c, i) => (
-                <li key={i}>{c.nome} — {c.email}</li>
-              ))}
-            </ul>
-          </div>
-        )}
+        <div className="cadastro-ultimos-wrap">
+          {clientes?.length > 0 && (
+            <div className="ultimos-cadastros">
+              <h3>Últimos clientes cadastrados</h3>
+              <ul>
+                {clientes.slice(-5).reverse().map((c, i) => (
+                  <li key={i}>
+                    {c.nome} — {c.email}
+                  </li>
+                ))}
+              </ul>
+            </div>
+          )}
+
+          {pedidos?.length > 0 && (
+            <div className="ultimos-cadastros">
+              <h3>Últimos pedidos cadastrados</h3>
+              <ul>
+                {pedidos.slice(-5).reverse().map((p, i) => {
+                  const cliente = clientes?.find((c) => c.id === p.clienteId);
+                  const produto = produtos?.find((pr) => pr.id === p.produtoId);
+                  return (
+                    <li key={i}>
+                      {cliente?.nome || "Cliente"} — {produto?.nome || "Produto"} —{" "}
+                      {p.quantidade} un.
+                    </li>
+                  );
+                })}
+              </ul>
+            </div>
+          )}
+        </div>
       </section>
     </div>
   );

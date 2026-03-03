@@ -34,8 +34,8 @@
 
 .cadastro-form-section {
   display: flex;
+  flex-direction: column;
   gap: 32px;
-  flex-wrap: wrap;
 }
 
 .cadastro-form {
@@ -47,6 +47,17 @@
   display: flex;
   flex-direction: column;
   gap: 18px;
+}
+
+.cadastro-form-destaque {
+  max-width: 480px;
+  padding: 32px;
+}
+
+.cadastro-ultimos-wrap {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
 }
 
 .form-group {
@@ -116,7 +127,8 @@
   border-radius: 16px;
   padding: 20px;
   border: 1px solid rgba(255, 255, 255, 0.06);
-  min-width: 280px;
+  min-width: 260px;
+  flex: 1;
 }
 
 .ultimos-cadastros h3 {

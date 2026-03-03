@@ -1,7 +1,25 @@
 export const CLIENTES_INICIAIS = [
-  { id: 1, nome: "Maria Silva", email: "maria@email.com", telefone: "(11) 98765-4321" },
-  { id: 2, nome: "João Santos", email: "joao@email.com", telefone: "(21) 91234-5678" },
-  { id: 3, nome: "Ana Oliveira", email: "ana@email.com", telefone: "(31) 99876-5432" },
+  {
+    id: 1,
+    nome: "Maria Silva",
+    email: "maria@email.com",
+    telefone: "(11) 98765-4321",
+    endereco: "Rua das Flores, 123 - São Paulo, SP",
+  },
+  {
+    id: 2,
+    nome: "João Santos",
+    email: "joao@email.com",
+    telefone: "(21) 91234-5678",
+    endereco: "Av. Brasil, 456 - Rio de Janeiro, RJ",
+  },
+  {
+    id: 3,
+    nome: "Ana Oliveira",
+    email: "ana@email.com",
+    telefone: "(31) 99876-5432",
+    endereco: "Rua Minas, 789 - Belo Horizonte, MG",
+  },
 ];
 
 export const PRODUTOS_INICIAIS = [
@@ -12,3 +30,5 @@ export const PRODUTOS_INICIAIS = [
   { id: 5, nome: "Webcam HD", preco: 279.9, estoque: 32, categoria: "Periféricos" },
   { id: 6, nome: "Headset Bluetooth", preco: 199.0, estoque: 56, categoria: "Áudio" },
 ];
+
+export const PEDIDOS_INICIAIS = [];

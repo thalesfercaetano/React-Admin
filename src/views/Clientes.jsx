@@ -1,6 +1,13 @@
+import { useState } from "react";
 import "./Clientes.css";
 
 function Clientes({ clientes = [], onDeletar }) {
+  const [busca, setBusca] = useState("");
+
+  const filtrados = clientes.filter((c) => {
+    const texto = `${c.nome} ${c.email} ${c.telefone || ""} ${c.endereco || ""}`.toLowerCase();
+    return texto.includes(busca.toLowerCase());
+  });
 
   return (
     <div className="page clientes-page">
@@ -9,39 +16,39 @@ function Clientes({ clientes = [], onDeletar }) {
         <p className="page-subtitle">Lista de clientes cadastrados no sistema.</p>
       </header>
 
-      <div className="clientes-table-wrap">
-        <table className="clientes-table">
-          <thead>
-            <tr>
-              <th>Nome</th>
-              <th>E-mail</th>
-              <th>Telefone</th>
-              <th>Ações</th>
-            </tr>
-          </thead>
-          <tbody>
-            {clientes.map((c, i) => (
-              <tr key={c.id ?? i}>
-                <td>{c.nome}</td>
-                <td>{c.email}</td>
-                <td>{c.telefone || "—"}</td>
-                <td>
-                  <button
-                    type="button"
-                    className="btn-excluir"
-                    onClick={() => onDeletar(c.id)}
-                  >
-                    Excluir
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
+      <div className="clientes-filtros">
+        <input
+          type="text"
+          placeholder="Buscar cliente (nome, e-mail, telefone...)"
+          value={busca}
+          onChange={(e) => setBusca(e.target.value)}
+          className="busca-input"
+        />
       </div>
 
-      {clientes.length === 0 && (
-        <p className="sem-resultados">Nenhum cliente cadastrado.</p>
+      <div className="clientes-grid">
+        {filtrados.map((c) => (
+          <article key={c.id} className="cliente-card">
+            <div className="cliente-icon">👤</div>
+            <h3>{c.nome}</h3>
+            <p className="cliente-email">{c.email}</p>
+            <p className="cliente-telefone">{c.telefone || "—"}</p>
+            {c.endereco && (
+              <p className="cliente-endereco">{c.endereco}</p>
+            )}
+            <button
+              type="button"
+              className="btn-excluir"
+              onClick={() => onDeletar(c.id)}
+            >
+              Excluir
+            </button>
+          </article>
+        ))}
+      </div>
+
+      {filtrados.length === 0 && (
+        <p className="sem-resultados">Nenhum cliente encontrado.</p>
       )}
     </div>
   );
